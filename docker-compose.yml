@@ -1,0 +1,22 @@
+version: '2'
+services:
+
+  microservice:
+    image: experiencedevops/customerservice:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - all
+  uiangular:
+    image: experiencedevops/selfserviceapp:latest
+    environment:
+      BASE_URL: http://192.168.99.100:9090
+    ports:
+      - "80:80"
+    depends_on:
+      - microservice
+    networks:
+      - all
+
+networks:
+  all:
